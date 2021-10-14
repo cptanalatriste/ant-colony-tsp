@@ -22,8 +22,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws ConfigurationException {
-//        System.out.println("Solving a very small problem ");
-//        solveTsp(TravellingHelper.getVerySmallProblem());
+        System.out.println("Solving a very small problem ");
+        solveTsp(TravellingHelper.getVerySmallProblem());
 
         System.out.println("Solving a small problem ");
         solveTsp(TravellingHelper.getSmallProblem());
