@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment> {
 
     private final List<String> citiesToVisit;
-    private String initialCity;
     private final Random random = new Random();
 
     public AntForSimpleTsp(List<String> citiesToVisit) {
@@ -24,7 +23,8 @@ public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment>
         super.clear();
 
         int selectedIndex = random.nextInt(this.citiesToVisit.size());
-        this.initialCity = citiesToVisit.get(selectedIndex);
+        String initialCity = citiesToVisit.get(selectedIndex);
+        this.visitNode(initialCity, null);
     }
 
     @Override
@@ -39,11 +39,8 @@ public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment>
 
     @Override
     public Double getHeuristicValue(String candidateCity, Integer positionInSolution, SimpleTspEnvironment simpleTspEnvironment) {
-        String lastCity = this.initialCity;
-        if (getCurrentIndex() > 0) {
-            lastCity = this.getSolution().get(getCurrentIndex() - 1);
-        }
 
+        String lastCity = this.getSolution().get(getCurrentIndex() - 1);
         Integer distance = simpleTspEnvironment.getDistanceMap().get(lastCity).get(candidateCity);
         return 1 / distance.doubleValue();
     }
@@ -59,11 +56,8 @@ public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment>
     @Override
     public Double getPheromoneTrailValue(String city, Integer cityIndex, SimpleTspEnvironment environment) {
 
-        String lastCity = this.initialCity;
-        if (getCurrentIndex() > 0) {
-            lastCity = this.getSolution().get(getCurrentIndex() - 1);
-        }
 
+        String lastCity = this.getSolution().get(getCurrentIndex() - 1);
         return environment.getPheromoneTrailValue(lastCity, city);
     }
 
@@ -71,11 +65,7 @@ public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment>
     public void setPheromoneTrailValue(String city, Integer cityIndex, SimpleTspEnvironment environment,
                                        Double pheromoneValue) {
 
-        String lastCity = this.initialCity;
-        if (getCurrentIndex() > 0) {
-            lastCity = this.getSolution().get(getCurrentIndex() - 1);
-        }
-
+        String lastCity = this.getSolution().get(getCurrentIndex() - 1);
         environment.setPheromoneTrailValue(lastCity, city, pheromoneValue);
     }
 }
