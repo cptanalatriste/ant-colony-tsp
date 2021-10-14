@@ -2,12 +2,17 @@ package tsp.antcolony.isula;
 
 import isula.aco.algorithms.antsystem.AntSystemConfigurationProvider;
 
-public record SimpleTspConfiguration(
-        SimpleTspEnvironment environment) implements AntSystemConfigurationProvider {
+public class SimpleTspConfiguration implements AntSystemConfigurationProvider {
+
+    private final SimpleTspEnvironment environment;
+
+    public SimpleTspConfiguration(SimpleTspEnvironment environment) {
+        this.environment = environment;
+    }
 
     @Override
     public int getNumberOfAnts() {
-        return environment.getAllCities().size() / 2;
+        return this.environment.getAllCities().size() / 2;
     }
 
     @Override
