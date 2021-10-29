@@ -1,2 +1,2 @@
 # ant-colony-tsp
-Supporting code for lesson on Swarm Intelligence
+Supporting code for the article on Swarm Intelligence
