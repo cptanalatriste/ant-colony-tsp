@@ -5,7 +5,6 @@ import tsp.TravellingHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment> {
 
@@ -50,7 +49,7 @@ public class AntForSimpleTsp extends isula.aco.Ant<String, SimpleTspEnvironment>
 
         return this.citiesToVisit.stream()
                 .filter(city -> !this.isNodeVisited(city))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

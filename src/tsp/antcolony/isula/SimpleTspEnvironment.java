@@ -11,14 +11,14 @@ import java.util.stream.IntStream;
 public class SimpleTspEnvironment extends Environment {
 
     private final Map<String, Map<String, Integer>> distanceMap;
-    private List<String> allCities;
+    private final List<String> allCities;
     private final Map<String, Integer> cityToIndex = new HashMap<>();
 
     public SimpleTspEnvironment(Map<String, Map<String, Integer>> distanceMap) {
         this.distanceMap = distanceMap;
         this.allCities = new ArrayList<>(this.distanceMap.keySet());
         IntStream.range(0, allCities.size())
-                .forEach((index) -> cityToIndex.put(allCities.get(index), index));
+                .forEach(index -> cityToIndex.put(allCities.get(index), index));
 
         this.setPheromoneMatrix(createPheromoneMatrix());
     }
